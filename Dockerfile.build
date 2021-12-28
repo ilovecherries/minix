@@ -1,0 +1,17 @@
+# Dockerfile for creating a Linux build environment on arm64/aarch64 for building
+# Minix3 for i386 or ARM. Tested on an Apple Silicon 2021 MacBook
+
+FROM ubuntu:16.04@sha256:70fa660340a344b46cc56b3606dc8abd3bf48b5cbce13d01c720e9793a6bc3c0
+RUN apt update && apt-get install -y build-essential automake-1.15 curl git zlibc zlib1g zlib1g-dev
+RUN apt-get install -y g++ vim
+
+# This is the location expected by the build scripts by default
+WORKDIR /usr/src
+COPY . .
+RUN chmod a+rwx -R .
+# Old config.guess doesn't work properly with aarch64, replace all of them
+# with 1.15's copy
+RUN for f in $(find ./dist/ ./distrib ./gnu/ ./external/ -name config.guess); do \
+    cp /usr/share/automake-1.15/config.guess $f; done
+
+ENTRYPOINT ["/bin/bash"]
