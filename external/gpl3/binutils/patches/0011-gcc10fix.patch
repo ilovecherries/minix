@@ -1,0 +1,11 @@
+diff -u --recursive dist.orig/gold/errors.h dist/gold/errors.h
+--- dist.orig/gold/errors.h	2011-06-08 08:43:28.000000000 +0400
++++ dist/gold/errors.h	2021-03-25 13:07:03.148266532 +0300
+@@ -24,6 +24,7 @@
+ #define GOLD_ERRORS_H
+ 
+ #include <cstdarg>
++#include <string>
+ 
+ #include "gold-threads.h"
+ 
