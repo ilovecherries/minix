@@ -60,7 +60,7 @@ service sshd start
 The command I use to start Minix in a virtual machine is:
 ```sh
 qemu-system-x86_64 -cpu max -m 2g  \
-    -drive if=virtio,file=minix_x86.img,format=raw \
+    -hda minix.qcow2 \
     -netdev user,id=mynet0,hostfwd=tcp::7722-:22 \
     -device e1000,netdev=mynet0
 ```
