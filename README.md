@@ -54,8 +54,12 @@ cp /usr/pkg/etc/rc.d/sshd /etc/rc.d/
 echo 'sshd=YES' >> /etc/rc.conf
 service sshd start
 ```
+And add this line to `/usr/pkg/etc/ssh/sshd_config`:
+```
+PermitRootLogin yes
+```
 
-# Running an existing image
+# Running existing image
 
 The command I use to start Minix in a virtual machine is:
 ```sh
@@ -65,8 +69,8 @@ qemu-system-x86_64 -cpu max -m 2g  \
     -device e1000,netdev=mynet0
 ```
 
-assuming `./minix_x86.img` is your minix image. This sets up port your host port 7722 to be forwarded to the VM's port 22, so that
-you can SSH into the minix instance rather than using the limited functionality QEMU-based terminal.
+This sets up port your host port 7722 to be forwarded to the VM's port 22, so that
+you can SSH into the minix instance (`ssh -p 7722 root@localhost`) rather than using the limited functionality QEMU-based terminal.
 
 Once you start the image and it boots, it gives you instructions - type `setup` to set up the package system and other things.
 
