@@ -18,7 +18,8 @@ struct hook_entry {
 } hooks[] = {
 	{ F1, 	proctab_dmp, "Kernel process table" },
 	{ F3,	image_dmp, "System image" },
-	{ F4,	privileges_dmp, "Process privileges" },
+	{ F4, messages_dmp, "Messages sent dump "},
+	// { F4,	privileges_dmp, "Process privileges" },
 	{ F5,	monparams_dmp, "Boot monitor parameters" },
 	{ F6,	irqtab_dmp, "IRQ hooks and policies" },
 	{ F7,	kmessages_dmp, "Kernel messages" },

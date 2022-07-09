@@ -83,6 +83,7 @@ struct proc {
 
   message p_sendmsg;		/* Message from this process if SENDING */
   message p_delivermsg;		/* Message for this process if MF_DELIVERMSG */
+  u64_t p_messages_sent[NR_PROCS + NR_TASKS];
   vir_bytes p_delivermsg_vir;	/* Virtual addr this proc wants message at */
 
   /* If handler functions detect a process wants to do something with

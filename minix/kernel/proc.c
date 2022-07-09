@@ -134,6 +134,8 @@ void proc_init(void)
 		rp->p_scheduler = NULL;		/* no user space scheduler */
 		rp->p_priority = 0;		/* no priority */
 		rp->p_quantum_size_ms = 0;	/* no quantum size */
+		for (int j = 0; j < NR_PROCS + NR_TASKS; ++j)
+			rp->p_messages_sent[j] = 0;
 
 		/* arch-specific initialization */
 		arch_proc_reset(rp);
@@ -905,6 +907,7 @@ int mini_send(
 		IPC_STATUS_ADD_FLAGS(dst_ptr, IPC_FLG_MSG_FROM_KERNEL);
 	}
 
+	caller_ptr->p_messages_sent[dst_ptr->p_nr]++;
 	dst_ptr->p_delivermsg.m_source = caller_ptr->p_endpoint;
 	dst_ptr->p_misc_flags |= MF_DELIVERMSG;
 
